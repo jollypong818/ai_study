@@ -56,6 +56,6 @@ description: >-
      ```powershell
      Get-ChildItem "<폴더경로>\*.ipynb" | ForEach-Object { $nb = Get-Content $_.FullName -Raw -Encoding UTF8 | ConvertFrom-Json; "$($_.Name): OK ($($nb.cells.Count) cells)" }
      ```
-2. 모든 코드 셀 아래에 **상세 코드 해설(Python 문법 + Java/SQL 비유)**이 빠지지 않았는지 점검한다.
+2. 모든 코드 셀 **내부 주석(줄별 동작·옵션·Java/SQL 비유)**과 코드 셀 아래 **`🔍 코드 뜯어보기` 해설**이 빠지지 않았는지 점검한다.
 3. AI 금지 문체(`~는 ~를 전제로 하지 않는다`, `~라고 해서 반드시 ~인 것은 아니다` 등)가 들어가지 않았는지 점검한다.
 4. 사용자에게 생성된 파일 목록(클릭 가능한 `file:///` 링크)과 Colab 업로드 방법을 안내한다.

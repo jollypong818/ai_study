@@ -68,3 +68,19 @@
 3. 이 폴더의 `.ipynb` 파일을 끌어다 놓습니다.
 4. 위에서부터 셀을 하나씩 `Shift + Enter`로 실행합니다.  
    *(첫 코드 셀에서 `dataset/hour.csv`를 자동 다운로드하므로 별도 파일 업로드가 필요 없습니다.)*
+
+## 5. Python 스크립트로 전체 실습 실행
+
+[`bike_rental_regression.py`](./bike_rental_regression.py)는 위 노트북 5개와 자습 미션을 순서대로 실행합니다. 각 단계의 Python 문법과 실험 의도를 한국어 주석으로 읽을 수 있습니다.
+
+저장소 루트에서 다음 명령을 실행합니다(Python 3.10 이상). 필요한 패키지가 이미 설치된 `.venv`가 있다면 그 환경의 Python을 사용하면 됩니다.
+
+```bash
+python -m pip install pandas numpy matplotlib scikit-learn joblib
+python regression/bike_rental_regression.py
+```
+
+- 기본 입력: `regression/dataset/hour.csv`. 실행 위치가 달라도 이 파일을 찾습니다.
+- 기본 출력: `regression/outputs/`에 그래프 6장, `benchmark.csv`, `top_errors.csv`, 새 `bike_hgb_model.joblib`을 저장합니다. `--output-dir`로 변경할 수 있습니다.
+- 랜덤 분할과 정답 누수 실험은 함정 재현용입니다. 실제 미래 예측을 비교할 때는 `2012-09-01` 기준의 시계열 결과를 보세요. 기존 노트북 수치를 복사하지 않고 실행할 때 다시 계산합니다.
+- 최종 점수는 각 예측 시점에 과거 대여 기록이 확정됐다고 가정하며, 날씨 입력에는 과거 관측값을 사용합니다. 운영에서는 해당 시점에 이용할 수 있었던 예보로 다시 검증하세요. API 예제는 모델을 다시 읽어 DTO 3건을 예측하는 모의 추론이며, HTTP 서버는 실행하지 않습니다.
